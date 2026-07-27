@@ -1,0 +1,31 @@
+:root { --ink:#18332d; --moss:#23443c; --mist:#e9f0ed; --berry:#9e3d42; --amber:#d69a34; --paper:#fffdf8; }
+* { box-sizing:border-box; }
+html { background:var(--mist); color:var(--ink); font-family:Georgia, "Times New Roman", serif; line-height:1.55; }
+body { margin:0; }
+.skip-link { position:absolute; left:1rem; top:-4rem; padding:.7rem 1rem; background:var(--paper); color:var(--moss); z-index:2; }
+.skip-link:focus { top:1rem; }
+.masthead, footer { background:var(--moss); color:#fff; text-align:center; padding:1.4rem 1rem; }
+.masthead h1 { margin:.1rem 0; font-size:clamp(1.65rem, 6vw, 2.35rem); }
+.eyebrow { font-family:system-ui,sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.12em; margin:0 0:.6rem; }
+.story { max-width:54rem; margin:0 auto; padding:1rem; }
+.page { margin:1rem 0; padding:clamp(1.35rem, 5vw, 2.5rem); }
+.panel { background:var(--paper); border-radius:1.25rem; box-shadow:0 .45rem 1.4rem #23443c1c; overflow:hidden; }
+.cover, .ending { display:grid; gap:1rem; align-items:center; }
+.cover-copy { padding:clamp(1.35rem, 5vw, 2.5rem); }
+h2 { color:var(--moss); font-size:clamp(1.5rem, 5vw, 2.25rem); line-height:1.12; margin:.15rem 0 .8rem; }
+.lead { font-size:1.1rem; }
+.prose { max-width:39rem; margin-inline:auto; }
+.page-number { color:var(--berry); font-family:system-ui,sans-serif; font-size:.85rem; font-weight:700; }
+.image-page img, .cover img, .ending img { display:block; width:100%; height:auto; }
+.image-page { padding:0; }
+.image-page .prose { padding:1.5rem; }
+.listen { border:0; border-radius:99rem; background:var(--berry); color:#fff; cursor:pointer; font:700 1rem system-ui,sans-serif; padding:.7rem 1rem; }
+.listen:focus-visible, a:focus-visible { outline:3px solid var(--amber); outline-offset:3px; }
+.listen[aria-pressed="true"] { background:var(--moss); }
+.listen-note { font: .85rem system-ui,sans-serif; margin:.6rem 0 0; }
+.goodnight { color:var(--berry); font-size:1.15rem; font-style:italic; }
+footer { font: .8rem system-ui,sans-serif; }
+footer p { margin:0; }
+footer a { color:#fff; }
+@media (min-width:42rem) { .cover, .ending { grid-template-columns:1fr 1fr; } .ending .prose { padding-right:1rem; } .image-page { display:grid; grid-template-columns:1.1fr .9fr; } .image-page .prose { align-self:center; } }
+@media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; } }
