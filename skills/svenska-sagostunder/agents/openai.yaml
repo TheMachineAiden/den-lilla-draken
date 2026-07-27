@@ -1,0 +1,4 @@
+interface:
+  display_name: "Svenska sagostunder"
+  short_description: "Skriv trygga svenska godnattsagor"
+  default_prompt: "Use $svenska-sagostunder to create a gentle Swedish bedtime story for ages 0–3."

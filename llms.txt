@@ -1,0 +1,13 @@
+# Den lilla draken
+
+> Original Swedish illustrated bedtime stories for ages 0–3.
+
+## First story
+
+- [Den lilla draken och den borttappade glöden](index.html): A gentle Swedish bedtime story about an unnamed child, the talkative little dragon, and a lost glow that finds its way home.
+
+## Project references
+
+- [Lore bible](LORE.md): World, narrative promises, and visual direction.
+- [Illustration provenance](ASSET-PROVENANCE.md): Original-image sourcing for every illustration.
+- [Svenska sagostunder skill](skills/svenska-sagostunder/SKILL.md): Reusable instructions for warm Swedish bedtime stories.
