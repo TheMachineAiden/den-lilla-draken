@@ -25,6 +25,14 @@
             <p class="eyebrow">EN GODNATTSAGA FÖR 0–3 ÅR</p>
             <h2 id="story-title">Den lilla draken och den borttappade glöden</h2>
             <p class="lead">En varm liten saga om att leta, lysa och hitta hem.</p>
+            <fieldset class="edition-picker" aria-describedby="edition-note">
+              <legend>Välj hur sagan ska läsas</legend>
+              <div class="edition-options">
+                <label><input type="radio" name="edition" value="prose" checked> Saga</label>
+                <label><input type="radio" name="edition" value="rhyme"> På rim</label>
+              </div>
+              <p id="edition-note">Du kan byta när som helst. Bilderna och sagans väg är desamma.</p>
+            </fieldset>
             <button class="listen" type="button" data-read-story aria-pressed="false"><span aria-hidden="true">◖</span> Läs högt</button>
             <p class="listen-note" id="listen-note">Tryck för att få sagan uppläst.</p>
           </div>
@@ -34,9 +42,16 @@
           <div class="prose">
             <p class="page-number" aria-hidden="true">1</p>
             <h2 id="start-title">När kvällen blev blå</h2>
-            <p>När kvällen blev blå, tittade barnet ut genom fönstret. Bakom den gamla stenen blinkade skogen. Bara barnet kunde se den.</p>
-            <p>"Hej!" viskade en röst. Det var Den lilla draken. Hen hade små lingonröda vingar och en svans som viftade när hen blev glad.</p>
-            <p>"Min glöd är borta," sa draken. "Utan den blir min kvällsmacka alldeles kall."</p>
+            <div data-edition-copy="prose">
+              <p>När kvällen blev blå, tittade barnet ut genom fönstret. Bakom den gamla stenen blinkade skogen. Bara barnet kunde se den.</p>
+              <p>"Hej!" viskade en röst. Det var Den lilla draken. Hen hade små lingonröda vingar och en svans som viftade när hen blev glad.</p>
+              <p>"Min glöd är borta," sa draken. "Utan den blir min kvällsmacka alldeles kall."</p>
+            </div>
+            <div data-edition-copy="rhyme" hidden>
+              <p>När kvällen blev blå<br>tittade barnet ut genom fönstret.<br>Bakom den gamla stenen<br>blinkade skogen, stilla och grön.<br>Bara barnet kunde se den.</p>
+              <p>"Hallå!" viskade en röst.<br>Det var Den lilla draken,<br>med lingonröda vingar<br>och en svans som viftade av glädje.</p>
+              <p>"Min glöd har gått bort," sa draken.<br>"Utan den blir kvällsmackan kall."</p>
+            </div>
           </div>
           <figure class="page-illustration moonlit-window">
             <img src="assets/illustrations/cover.webp" width="1499" height="1049" loading="lazy" decoding="async" alt="Barnet och Den lilla draken står tillsammans i den hemliga skogen i månsken.">
@@ -47,9 +62,16 @@
           <div class="prose">
             <p class="page-number" aria-hidden="true">2</p>
             <h2 id="glow-title">En liten prick av ljus</h2>
-            <p>Barnet och draken gick försiktigt mellan mossiga stenar. De lyssnade efter ett pling. De tittade under ett blad. De tittade bakom en liten svamp.</p>
-            <p>"Där!" sa barnet.</p>
-            <p>I mossan låg en pytteliten glöd. Den lyste mjukt som en varm lampa.</p>
+            <div data-edition-copy="prose">
+              <p>Barnet och draken gick försiktigt mellan mossiga stenar. De lyssnade efter ett pling. De tittade under ett blad. De tittade bakom en liten svamp.</p>
+              <p>"Där!" sa barnet.</p>
+              <p>I mossan låg en pytteliten glöd. Den lyste mjukt som en varm lampa.</p>
+            </div>
+            <div data-edition-copy="rhyme" hidden>
+              <p>Mellan mossiga stenar<br>gick barnet och draken.<br>De lyssnade efter ett pling,<br>de kikade under ett blad,<br>de tittade bakom en liten svamp.</p>
+              <p>"Där!" sa barnet.</p>
+              <p>I mossan låg glöden,<br>pytteliten och varm,<br>som en lampa med mjukt ljus.</p>
+            </div>
           </div>
         </section>
         <section class="page spread return-spread reader-page" aria-labelledby="return-title">
@@ -59,18 +81,32 @@
           <div class="prose">
             <p class="page-number" aria-hidden="true">3</p>
             <h2 id="return-title">Glöden hittar hem</h2>
-            <p>Draken höll glöden nära magen. "Tack," sa hen. "Nu kan vi värma mackan – men först kan glöden värma dina händer."</p>
-            <p>Barnets händer blev varma och skogen blev lugn. Ugglan sa god natt. Löven susade god natt.</p>
-            <p>Vid den gamla stenen vinkade Den lilla draken. "Vi ses när kvällen blir blå igen."</p>
+            <div data-edition-copy="prose">
+              <p>Draken höll glöden nära magen. "Tack," sa hen. "Nu kan vi värma mackan – men först kan glöden värma dina händer."</p>
+              <p>Barnets händer blev varma och skogen blev lugn. Ugglan sa god natt. Löven susade god natt.</p>
+              <p>Vid den gamla stenen vinkade Den lilla draken. "Vi ses när kvällen blir blå igen."</p>
+            </div>
+            <div data-edition-copy="rhyme" hidden>
+              <p>Draken höll glöden nära magen.<br>"Tack," sa hen. "Mackan kan vänta.<br>Först får glöden värma dina händer."</p>
+              <p>Barnets händer blev varma,<br>och skogen blev lugn.<br>Ugglan sa god natt.<br>Löven susade god natt.</p>
+              <p>Vid den gamla stenen vinkade draken.<br>"Vi ses när kvällen blir blå igen."</p>
+            </div>
           </div>
         </section>
         <section class="page ending panel reader-page" aria-labelledby="ending-title">
           <div class="prose">
             <p class="page-number" aria-hidden="true">4</p>
             <h2 id="ending-title">Hemma under täcket</h2>
-            <p>Barnet gick hem till sitt vanliga rum. Under täcket kändes händerna fortfarande lite varma.</p>
-            <p>Utanför fönstret glimmade en enda liten prick bland träden.</p>
-            <p class="goodnight">God natt, lilla glöd.<br>God natt, lilla drake.<br>God natt, du.</p>
+            <div data-edition-copy="prose">
+              <p>Barnet gick hem till sitt vanliga rum. Under täcket kändes händerna fortfarande lite varma.</p>
+              <p>Utanför fönstret glimmade en enda liten prick bland träden.</p>
+              <p class="goodnight">God natt, lilla glöd.<br>God natt, lilla drake.<br>God natt, du.</p>
+            </div>
+            <div data-edition-copy="rhyme" hidden>
+              <p>Barnet gick hem till sitt vanliga rum.<br>Under täcket var händerna<br>fortfarande lite varma.</p>
+              <p>Utanför fönstret glimmade<br>en enda liten prick bland träden.</p>
+              <p class="goodnight">God natt, lilla glöd.<br>God natt, lilla drake.<br>God natt, du.</p>
+            </div>
           </div>
           <img src="assets/illustrations/home.webp" width="1500" height="1049" loading="lazy" decoding="async" alt="Ett barn ligger tryggt under ett täcke i sitt rum medan en liten gyllene prick syns i skogen utanför fönstret.">
         </section>
@@ -83,6 +119,6 @@
       <p class="reader-hint">Dra åt sidan på boken, använd knapparna eller piltangenterna för att bläddra.</p>
     </main>
     <footer><p>Text och illustrationer: original för Den lilla draken · <a href="ASSET-PROVENANCE.md">bildursprung</a> · <a href="LORE.md">sagbibel</a></p></footer>
-    <script src="script.js?v=reader-2"></script>
+    <script src="script.js?v=reader-3"></script>
   </body>
 </html>

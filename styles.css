@@ -15,6 +15,13 @@ body { margin:0; }
 .cover-copy { padding:clamp(1.35rem, 5vw, 2.5rem); }
 h2 { color:var(--moss); font-family:var(--display); font-size:clamp(1.75rem, 5vw, 2.65rem); font-weight:700; letter-spacing:-.03em; line-height:1.08; margin:.15rem 0 1rem; text-wrap:balance; }
 .lead { font-size:1.1rem; }
+.edition-picker { border:0; margin:1.2rem 0; padding:0; }
+.edition-picker legend { color:var(--moss); font-size:.92rem; font-weight:700; margin-bottom:.45rem; padding:0; }
+.edition-options { display:flex; flex-wrap:wrap; gap:.55rem; }
+.edition-options label { align-items:center; background:#e9f0ed; border:1px solid #23443c2e; border-radius:99rem; cursor:pointer; display:inline-flex; font-weight:700; gap:.4rem; min-height:2.55rem; padding:.45rem .85rem; }
+.edition-options label:has(input:checked) { background:var(--moss); border-color:var(--moss); color:#fff; }
+.edition-options input { accent-color:var(--amber); margin:0; }
+.edition-picker p { color:#44635b; font-size:.78rem; line-height:1.45; margin:.55rem 0 0; }
 .prose { max-width:38rem; margin-inline:auto; font-size:clamp(1.06rem, 2vw, 1.19rem); }
 .prose p { margin:0 0 1.15rem; }
 .prose p:last-child { margin-bottom:0; }
