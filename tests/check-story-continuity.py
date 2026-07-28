@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guard the small, two-character bedtime-story contract."""
+"""Guard the two standalone, two-character bedtime-story contracts."""
 
 from pathlib import Path
 import re
@@ -18,8 +18,8 @@ assert "| Den lilla draken |" in lore
 assert "Ugglan" not in story
 assert not re.search(r"\bHo\b", story)
 
-# Both editions follow the same calm plot: familiar home, a small loss, a
-# cooperative choice, shared warmth, a brief shown moral, then home and sleep.
+# The prose tale retains its own complete red thread: familiar home, a small
+# loss, a cooperative choice, shared warmth, then home and sleep.
 for required in (
     "När kvällen blev blå",
     "glöd har rullat ner i mossan",
@@ -31,4 +31,22 @@ for required in (
 ):
     assert required in story, required
 
-print("Verified character continuity and the bedtime-story red thread.")
+# The rhyme edition is a different complete tale: the dragon's missing final
+# note returns when the child chooses to wait, listen and hum together. It must
+# not quietly revert to the prose tale's ember-and-snack events.
+rhyme_blocks = re.findall(
+    r'<div data-edition-copy="rhyme" hidden>(.*?)</div>', story, re.DOTALL
+)
+assert rhyme_blocks, "Missing rhyme edition"
+rhyme = "\n".join(rhyme_blocks)
+for required in (
+    "En liten ton är borta ur min sång.",
+    "Barnet nynnade sakta; draken sjöng med.",
+    "När vi lyssnar en stund",
+    "God natt, lilla drake, sov så sött.",
+):
+    assert required in rhyme, required
+for prose_only in ("glöd", "kvällsmacka", "varm kupa"):
+    assert prose_only not in rhyme, prose_only
+
+print("Verified character continuity and two distinct, calm bedtime-story red threads.")

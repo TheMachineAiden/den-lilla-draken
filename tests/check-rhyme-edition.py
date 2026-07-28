@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep the optional edition as role-safe, varied exact-rhyme couplets."""
+"""Keep the independent rhyme tale role-safe and phonetically grounded."""
 
 from html.parser import HTMLParser
 from pathlib import Path
@@ -48,25 +48,18 @@ def ending(line):
 # Each pair was checked with rim/scripts/compare_rim.py against the bundled
 # Swedish SLR29 pronunciation lexicon. `family` is that checked phonetic tail,
 # recorded here so a changed word cannot silently turn a spelling rhyme into a
-# false pass. The repeated HAND/LAND motif supports the shared-warmth action;
-# the repeated SNÄLL/KVÄLL ending is the calm evening refrain. Every other
-# family must occur once.
+# false pass. The tale deliberately uses a different family in every couplet.
 EXPECTED_COUPLETS = [
-    (("blå", "då"), "O"), (("sten", "månsken"), "EN"),
-    (("röst", "tröst"), "OST"), (("trygg", "rygg"), "YGG"),
-    (("sväng", "äng"), "ANG"), (("nej", "mig"), "AJ"),
-    (("rad", "blad"), "AD"), (("pling", "ring"), "ING"),
-    (("röd", "glöd"), "OD"), (("vrå", "ändå"), "AO"),
-    (("hand", "land"), "AND"),
-    (("hand", "land"), "AND"), (("draken", "saken"), "AKEN"),
-    (("fart", "klart"), "ART"), (("snäll", "kväll"), "ALL"),
-    (("stark", "mark"), "ARK"), (("snäll", "kväll"), "ALL"),
-    (("rum", "ljum"), "UM"),
-    (("prick", "gick"), "ICK"), (("natt", "skatt"), "AT"),
+    (("blå", "då"), "O"), (("snäll", "kväll"), "ALL"),
+    (("sång", "gång"), "ONG"), (("sätt", "rätt"), "ET"),
+    (("slag", "dag"), "AG"), (("bo", "ro"), "U"),
+    (("med", "led"), "ED"), (("klar", "kvar"), "AR"),
+    (("stund", "grund"), "UND"), (("klart", "snart"), "ART"),
+    (("vit", "bit"), "IT"), (("minne", "därinne"), "INE"),
+    (("sött", "trött"), "9T"),
 ]
 
 EXPECTED_PAIRS = [pair for pair, _family in EXPECTED_COUPLETS]
-ALLOWED_REFRAIN_FAMILIES = {"AND", "ALL"}
 POSSESSIVE_PRONOUN_ENDINGS = {"min", "mitt", "mina", "din", "ditt", "dina", "sin", "sitt", "sina"}
 
 
@@ -80,8 +73,6 @@ assert not set(ending(line) for line in parser.lines) & POSSESSIVE_PRONOUN_ENDIN
 
 families = [family for _pair, family in EXPECTED_COUPLETS]
 duplicates = {family for family in families if families.count(family) > 1}
-assert duplicates == ALLOWED_REFRAIN_FAMILIES, duplicates
-assert [pair for pair, family in EXPECTED_COUPLETS if family == "AND"] == [("hand", "land"), ("hand", "land")]
-assert [pair for pair, family in EXPECTED_COUPLETS if family == "ALL"] == [("snäll", "kväll"), ("snäll", "kväll")]
+assert not duplicates, duplicates
 
-print(f"Verified {len(actual_pairs)} adjacent exact-rhyme couplets and one intentional refrain.")
+print(f"Verified {len(actual_pairs)} adjacent exact-rhyme couplets with distinct rhyme families.")

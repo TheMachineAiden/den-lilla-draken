@@ -60,7 +60,7 @@ document.addEventListener('keydown', (event) => {
 showPage(0);
 
 function storyForReading() {
-  return [...document.querySelectorAll('.reader-page h2, .reader-page [data-edition-copy]:not([hidden]) p')]
+  return [...document.querySelectorAll('.reader-page [data-edition-title]:not([hidden]), .reader-page [data-edition-copy]:not([hidden]) p')]
     .filter((el) => !el.classList.contains('page-number'))
     .map((el) => el.textContent.trim())
     .join('. ');
@@ -68,8 +68,9 @@ function storyForReading() {
 
 function setEdition(edition) {
   selectedEdition = edition;
-  document.querySelectorAll('[data-edition-copy]').forEach((copy) => {
-    copy.hidden = copy.dataset.editionCopy !== edition;
+  document.querySelectorAll('[data-edition-copy], [data-edition-title]').forEach((copy) => {
+    const copyEdition = copy.dataset.editionCopy || copy.dataset.editionTitle;
+    copy.hidden = copyEdition !== edition;
   });
   if ('speechSynthesis' in window && speechSynthesis.speaking) {
     speechSynthesis.cancel();
