@@ -17,6 +17,13 @@ I skogen bor Den lilla draken: liten, pratglad, busig och modigt nyfiken.
 karaktär efter att den har introducerats i sagan och lagts till i tabellen ovan.
 Naturdetaljer som löv, stenar och mossa är miljö, inte figurer.
 
+## Berättelser
+
+- **Den lilla draken och den borttappade glöden** är den första sagan.
+- **Den lilla draken och den viskande stenen** är en fristående andra saga.
+  Det viskande ljudet kommer från ett löv i vinden; stenen och lövet är miljö,
+  inte figurer.
+
 ## Berättelsens löfte
 
 - Skriv för 0–3 år med hela, mjuka svenska meningar och ord som är roliga att

@@ -6,6 +6,9 @@ body { margin:0; }
 .skip-link:focus { top:1rem; }
 .masthead, footer { background:var(--moss); color:#fff; text-align:center; padding:1.4rem 1rem; }
 .masthead h1 { font-family:var(--display); font-weight:700; letter-spacing:-.035em; margin:.1rem 0; font-size:clamp(1.9rem, 6vw, 2.65rem); }
+.story-nav { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:.85rem auto 0; max-width:48rem; }
+.story-nav a { border:1px solid #ffffff78; border-radius:99rem; color:#fff; font-size:.78rem; font-weight:700; padding:.32rem .7rem; text-decoration:none; }
+.story-nav a[aria-current="page"] { background:#fff; color:var(--moss); }
 .eyebrow { font-family:var(--body); font-size:.72rem; font-weight:700; letter-spacing:.12em; margin:0 0:.6rem; }
 .story { max-width:48rem; margin:0 auto; padding:clamp(.75rem, 3vw, 1.5rem) clamp(.75rem, 4vw, 1.5rem) 0; }
 .reader-ready .reader-page[hidden] { display:none !important; }
