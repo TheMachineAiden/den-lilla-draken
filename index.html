@@ -17,7 +17,7 @@
     </header>
     <main id="sagan">
       <article class="story" aria-labelledby="story-title">
-        <section class="cover panel">
+        <section class="cover panel reader-page" aria-labelledby="story-title">
           <div class="cover-copy">
             <p class="eyebrow">EN GODNATTSAGA FÖR 0–3 ÅR</p>
             <h2 id="story-title">Den lilla draken och den borttappade glöden</h2>
@@ -27,34 +27,34 @@
           </div>
           <img src="assets/illustrations/cover.webp" width="1499" height="1049" fetchpriority="high" decoding="async" alt="Ett barn och Den lilla draken står vid den hemliga skogens mjuka blågröna träd i månsken.">
         </section>
-        <section class="page prose" aria-labelledby="start-title">
+        <section class="page prose reader-page" aria-labelledby="start-title">
           <p class="page-number" aria-hidden="true">1</p>
           <h2 id="start-title">När kvällen blev blå</h2>
           <p>När kvällen blev blå, tittade barnet ut genom fönstret. Bakom den gamla stenen blinkade skogen. Bara barnet kunde se den.</p>
           <p>"Hej!" viskade en röst. Det var Den lilla draken. Hen hade små lingonröda vingar och en svans som viftade när hen blev glad.</p>
           <p>"Min glöd är borta," sa draken. "Utan den blir min kvällsmacka alldeles kall."</p>
         </section>
-        <section class="page image-page panel">
+        <section class="page image-page panel reader-page" aria-labelledby="glow-title">
           <img src="assets/illustrations/glow.webp" width="1500" height="1049" loading="lazy" decoding="async" alt="Den lilla draken och barnet hittar en liten bärnstensfärgad glöd bland mjuk mossa, blågröna blad och en liten svamp.">
           <div class="prose">
             <p class="page-number" aria-hidden="true">2</p>
-            <h2>En liten prick av ljus</h2>
+            <h2 id="glow-title">En liten prick av ljus</h2>
             <p>Barnet och draken gick försiktigt mellan mossiga stenar. De lyssnade efter ett pling. De tittade under ett blad. De tittade bakom en liten svamp.</p>
             <p>"Där!" sa barnet.</p>
             <p>I mossan låg en pytteliten glöd. Den lyste mjukt som en varm lampa.</p>
           </div>
         </section>
-        <section class="page prose" aria-labelledby="return-title">
+        <section class="page prose reader-page" aria-labelledby="return-title">
           <p class="page-number" aria-hidden="true">3</p>
           <h2 id="return-title">Glöden hittar hem</h2>
           <p>Draken höll glöden nära magen. "Tack," sa hen. "Nu kan vi värma mackan – men först kan glöden värma dina händer."</p>
           <p>Barnets händer blev varma och skogen blev lugn. Ugglan sa god natt. Löven susade god natt.</p>
           <p>Vid den gamla stenen vinkade Den lilla draken. "Vi ses när kvällen blir blå igen."</p>
         </section>
-        <section class="page ending panel">
+        <section class="page ending panel reader-page" aria-labelledby="ending-title">
           <div class="prose">
             <p class="page-number" aria-hidden="true">4</p>
-            <h2>Hemma under täcket</h2>
+            <h2 id="ending-title">Hemma under täcket</h2>
             <p>Barnet gick hem till sitt vanliga rum. Under täcket kändes händerna fortfarande lite varma.</p>
             <p>Utanför fönstret glimmade en enda liten prick bland träden.</p>
             <p class="goodnight">God natt, lilla glöd.<br>God natt, lilla drake.<br>God natt, du.</p>
@@ -62,6 +62,12 @@
           <img src="assets/illustrations/home.webp" width="1500" height="1049" loading="lazy" decoding="async" alt="Ett barn ligger tryggt under ett täcke i sitt rum medan en liten gyllene prick syns i skogen utanför fönstret.">
         </section>
       </article>
+      <nav class="reader-controls" aria-label="Bläddra i sagan">
+        <button class="reader-button" type="button" data-previous-page disabled>← Föregående</button>
+        <p class="reader-status" data-reader-status aria-live="polite">Omslag · 1 av 5</p>
+        <button class="reader-button" type="button" data-next-page>Nästa →</button>
+      </nav>
+      <p class="reader-hint">Använd pilarna på tangentbordet för att bläddra.</p>
     </main>
     <footer><p>Text och illustrationer: original för Den lilla draken · <a href="ASSET-PROVENANCE.md">bildursprung</a> · <a href="LORE.md">sagbibel</a></p></footer>
     <script src="script.js"></script>
