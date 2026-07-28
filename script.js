@@ -61,7 +61,9 @@ document.addEventListener('keydown', (event) => {
 showPage(0);
 
 function storyForReading() {
-  return [...document.querySelectorAll('.reader-page [data-edition-heading] [data-edition-text]:not([hidden]), .reader-page [data-edition-copy]:not([hidden]) p')]
+  const editionText = [...document.querySelectorAll('.reader-page [data-edition-heading] [data-edition-text]:not([hidden]), .reader-page [data-edition-copy]:not([hidden]) p')];
+  const text = editionText.length ? editionText : [...document.querySelectorAll('.reader-page h2, .reader-page .prose p')];
+  return text
     .filter((el) => !el.classList.contains('page-number'))
     .map((el) => el.textContent.trim())
     .join('. ');

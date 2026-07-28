@@ -2,8 +2,9 @@
 
 En liten, originalillustrerad sagovärld på svenska för de allra yngsta.
 
-Första sagan är **Den lilla draken och den borttappade glöden**: ett tryggt
-kvällsäventyr om ett barn, en pratglad liten drake och en glöd som hittar hem.
+Här finns två trygga kvällsäventyr: **Den lilla draken och den borttappade
+glöden**, om en glöd som hittar hem, och **Den lilla draken och den viskande
+stenen**, om att lyssna tillsammans och hjälpa ett löv att vila.
 
 ## Läs lokalt
 
@@ -18,4 +19,5 @@ projektets rot. Sidan har inga beroenden eller externa bildanrop.
   svenska sagoguide som hör till världen.
 
 All text, illustrationer och kod i detta repo är originalskapade för *Den lilla
-draken*. Illustrationerna är handritade SVG-filer i `assets/illustrations/`.
+draken*. Illustrationerna finns som WebP och originalritade SVG-filer i
+`assets/illustrations/`.
