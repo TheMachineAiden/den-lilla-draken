@@ -24,7 +24,8 @@ function showPage(pageIndex, moveFocus = false) {
   }
   previousButton.disabled = currentPage === 0;
   nextButton.disabled = currentPage === pages.length - 1;
-  readerStatus.textContent = `${currentPage === 0 ? 'Omslag' : `Sida ${currentPage}`} · ${currentPage + 1} av ${pages.length}`;
+  const spanish = selectedEdition === 'spanish';
+  readerStatus.textContent = `${currentPage === 0 ? (spanish ? 'Portada' : 'Omslag') : `${spanish ? 'Página' : 'Sida'} ${currentPage}`} · ${currentPage + 1} ${spanish ? 'de' : 'av'} ${pages.length}`;
   if (moveFocus) {
     const heading = pages[currentPage].querySelector('h2');
     heading.setAttribute('tabindex', '-1');
@@ -60,7 +61,7 @@ document.addEventListener('keydown', (event) => {
 showPage(0);
 
 function storyForReading() {
-  return [...document.querySelectorAll('.reader-page h2, .reader-page [data-edition-copy]:not([hidden]) p')]
+  return [...document.querySelectorAll('.reader-page [data-edition-heading] [data-edition-text]:not([hidden]), .reader-page [data-edition-copy]:not([hidden]) p')]
     .filter((el) => !el.classList.contains('page-number'))
     .map((el) => el.textContent.trim())
     .join('. ');
@@ -68,14 +69,29 @@ function storyForReading() {
 
 function setEdition(edition) {
   selectedEdition = edition;
+  const spanish = edition === 'spanish';
+  document.documentElement.lang = spanish ? 'es' : 'sv';
   document.querySelectorAll('[data-edition-copy]').forEach((copy) => {
     copy.hidden = copy.dataset.editionCopy !== edition;
   });
+  document.querySelectorAll('[data-edition-text]').forEach((text) => {
+    text.hidden = text.dataset.editionText !== edition;
+  });
+  previousButton.textContent = spanish ? '← Anterior' : '← Föregående';
+  nextButton.textContent = spanish ? 'Siguiente →' : 'Nästa →';
+  document.querySelector('.reader-hint').textContent = spanish
+    ? 'Desliza el cuento, usa los botones o las flechas para pasar las páginas.'
+    : 'Dra åt sidan på boken, använd knapparna eller piltangenterna för att bläddra.';
+  if (!('speechSynthesis' in window && speechSynthesis.speaking)) {
+    button.innerHTML = `<span aria-hidden="true">◖</span> ${spanish ? 'Leer en voz alta' : 'Läs högt'}`;
+    note.textContent = spanish ? 'Pulsa para escuchar el cuento.' : 'Tryck för att få sagan uppläst.';
+  }
+  showPage(currentPage);
   if ('speechSynthesis' in window && speechSynthesis.speaking) {
     speechSynthesis.cancel();
     button.setAttribute('aria-pressed', 'false');
-    button.innerHTML = '<span aria-hidden="true">◖</span> Läs högt';
-    note.textContent = 'Uppläsningen stoppades när lässättet byttes.';
+    button.innerHTML = `<span aria-hidden="true">◖</span> ${spanish ? 'Leer en voz alta' : 'Läs högt'}`;
+    note.textContent = spanish ? 'La lectura se detuvo al cambiar de edición.' : 'Uppläsningen stoppades när lässättet byttes.';
   }
 }
 
@@ -85,9 +101,10 @@ editionInputs.forEach((input) => input.addEventListener('change', () => {
 
 if (!('speechSynthesis' in window)) { button.hidden = true; note.hidden = true; } else {
   button.addEventListener('click', () => {
-    if (speechSynthesis.speaking) { speechSynthesis.cancel(); button.setAttribute('aria-pressed', 'false'); button.innerHTML = '<span aria-hidden="true">◖</span> Läs högt'; note.textContent = 'Uppläsningen är pausad.'; return; }
-    const utterance = new SpeechSynthesisUtterance(storyForReading()); utterance.lang = 'sv-SE'; utterance.rate = selectedEdition === 'rhyme' ? .78 : .82;
-    utterance.onend = () => { button.setAttribute('aria-pressed', 'false'); button.innerHTML = '<span aria-hidden="true">◖</span> Läs högt'; note.textContent = 'Tryck för att få sagan uppläst.'; };
-    speechSynthesis.speak(utterance); button.setAttribute('aria-pressed', 'true'); button.innerHTML = '<span aria-hidden="true">■</span> Stoppa uppläsning'; note.textContent = 'Sagan läses långsamt på svenska.';
+    const spanish = selectedEdition === 'spanish';
+    if (speechSynthesis.speaking) { speechSynthesis.cancel(); button.setAttribute('aria-pressed', 'false'); button.innerHTML = `<span aria-hidden="true">◖</span> ${spanish ? 'Leer en voz alta' : 'Läs högt'}`; note.textContent = spanish ? 'La lectura está en pausa.' : 'Uppläsningen är pausad.'; return; }
+    const utterance = new SpeechSynthesisUtterance(storyForReading()); utterance.lang = spanish ? 'es-ES' : 'sv-SE'; utterance.rate = selectedEdition === 'rhyme' ? .78 : .82;
+    utterance.onend = () => { button.setAttribute('aria-pressed', 'false'); button.innerHTML = `<span aria-hidden="true">◖</span> ${spanish ? 'Leer en voz alta' : 'Läs högt'}`; note.textContent = spanish ? 'Pulsa para escuchar el cuento.' : 'Tryck för att få sagan uppläst.'; };
+    speechSynthesis.speak(utterance); button.setAttribute('aria-pressed', 'true'); button.innerHTML = `<span aria-hidden="true">■</span> ${spanish ? 'Detener lectura' : 'Stoppa uppläsning'}`; note.textContent = spanish ? 'El cuento se lee despacio en español.' : 'Sagan läses långsamt på svenska.';
   });
 }
