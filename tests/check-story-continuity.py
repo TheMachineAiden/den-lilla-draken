@@ -31,4 +31,21 @@ for required in (
 ):
     assert required in story, required
 
+# The Spanish prose edition carries the same small plot and its quiet return
+# home, without altering the two Swedish editions.
+for required in (
+    'data-edition-copy="spanish"',
+    "Cuando el atardecer se volvió azul",
+    "Mi brasa pequeñita ha rodado hasta el musgo",
+    "casita calentita con nuestras manos",
+    "Cuando nos ayudamos, un poquito de calor puede llegar muy lejos.",
+    "En casa, bajo la manta",
+    "Buenas noches, brasa pequeña.",
+):
+    assert required in story, required
+
+assert story.count('data-edition-copy="prose"') == 4
+assert story.count('data-edition-copy="rhyme"') == 4
+assert story.count('data-edition-copy="spanish"') == 4
+
 print("Verified character continuity and the bedtime-story red thread.")
