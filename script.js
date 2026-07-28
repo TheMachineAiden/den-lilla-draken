@@ -4,8 +4,10 @@ const pages = [...document.querySelectorAll('.reader-page')];
 const previousButton = document.querySelector('[data-previous-page]');
 const nextButton = document.querySelector('[data-next-page]');
 const readerStatus = document.querySelector('[data-reader-status]');
+const editionInputs = [...document.querySelectorAll('input[name="edition"]')];
 let currentPage = 0;
 let pointerStart = null;
+let selectedEdition = 'prose';
 
 document.documentElement.classList.add('reader-ready');
 
@@ -57,11 +59,34 @@ document.addEventListener('keydown', (event) => {
 
 showPage(0);
 
+function storyForReading() {
+  return [...document.querySelectorAll('.reader-page h2, .reader-page [data-edition-copy]:not([hidden]) p')]
+    .filter((el) => !el.classList.contains('page-number'))
+    .map((el) => el.textContent.trim())
+    .join('. ');
+}
+
+function setEdition(edition) {
+  selectedEdition = edition;
+  document.querySelectorAll('[data-edition-copy]').forEach((copy) => {
+    copy.hidden = copy.dataset.editionCopy !== edition;
+  });
+  if ('speechSynthesis' in window && speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    button.setAttribute('aria-pressed', 'false');
+    button.innerHTML = '<span aria-hidden="true">◖</span> Läs högt';
+    note.textContent = 'Uppläsningen stoppades när lässättet byttes.';
+  }
+}
+
+editionInputs.forEach((input) => input.addEventListener('change', () => {
+  if (input.checked) setEdition(input.value);
+}));
+
 if (!('speechSynthesis' in window)) { button.hidden = true; note.hidden = true; } else {
-  const story = [...document.querySelectorAll('.reader-page p, .reader-page h2')].filter((el) => !el.classList.contains('page-number') && !el.classList.contains('listen-note')).map((el) => el.textContent.trim()).join('. ');
   button.addEventListener('click', () => {
     if (speechSynthesis.speaking) { speechSynthesis.cancel(); button.setAttribute('aria-pressed', 'false'); button.innerHTML = '<span aria-hidden="true">◖</span> Läs högt'; note.textContent = 'Uppläsningen är pausad.'; return; }
-    const utterance = new SpeechSynthesisUtterance(story); utterance.lang = 'sv-SE'; utterance.rate = .82;
+    const utterance = new SpeechSynthesisUtterance(storyForReading()); utterance.lang = 'sv-SE'; utterance.rate = selectedEdition === 'rhyme' ? .78 : .82;
     utterance.onend = () => { button.setAttribute('aria-pressed', 'false'); button.innerHTML = '<span aria-hidden="true">◖</span> Läs högt'; note.textContent = 'Tryck för att få sagan uppläst.'; };
     speechSynthesis.speak(utterance); button.setAttribute('aria-pressed', 'true'); button.innerHTML = '<span aria-hidden="true">■</span> Stoppa uppläsning'; note.textContent = 'Sagan läses långsamt på svenska.';
   });
