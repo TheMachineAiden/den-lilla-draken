@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep the optional edition in index.html as adjacent exact-rhyme couplets."""
+"""Keep the optional edition as role-safe, varied exact-rhyme couplets."""
 
 from html.parser import HTMLParser
 from pathlib import Path
@@ -45,19 +45,26 @@ def ending(line):
     return words[-1]
 
 
-# These exact phonetic pairs were checked with rim/scripts/compare_rim.py
-# against the bundled Swedish SLR29 pronunciation lexicon. Keeping the
-# expected endings here makes an accidental non-rhyming edit fail locally
-# without requiring the 5 MB lexicon in this small static-site repository.
-EXPECTED_PAIRS = [
-    ("blå", "då"), ("grå", "blå"), ("röst", "tröst"),
-    ("glad", "blad"), ("så", "gå"), ("nej", "mig"),
-    ("därpå", "två"), ("pling", "ring"), ("blad", "glad"),
-    ("fin", "min"), ("glöd", "bröd"), ("hand", "land"),
-    ("draken", "saken"), ("glöd", "bröd"), ("skatt", "natt"),
-    ("grå", "så"), ("igen", "igen"), ("rum", "ljum"), ("prick", "gick"),
-    ("natt", "skatt"),
+# Each pair was checked with rim/scripts/compare_rim.py against the bundled
+# Swedish SLR29 pronunciation lexicon. `family` is that checked phonetic tail,
+# recorded here so a changed word cannot silently turn a spelling rhyme into a
+# false pass. The final AT repetition is the deliberately repeated good-night
+# refrain; every other family must occur once.
+EXPECTED_COUPLETS = [
+    (("blå", "då"), "O"), (("sten", "månsken"), "EN"),
+    (("röst", "tröst"), "OST"), (("trygg", "rygg"), "YGG"),
+    (("sväng", "äng"), "ANG"), (("nej", "mig"), "AJ"),
+    (("rad", "blad"), "AD"), (("pling", "ring"), "ING"),
+    (("röd", "glöd"), "OD"), (("vrå", "ändå"), "AO"),
+    (("hand", "land"), "AND"), (("draken", "saken"), "AKEN"),
+    (("fart", "klart"), "ART"), (("skatt", "natt"), "AT"),
+    (("snäll", "kväll"), "ALL"), (("rum", "ljum"), "UM"),
+    (("prick", "gick"), "ICK"), (("natt", "skatt"), "AT"),
 ]
+
+EXPECTED_PAIRS = [pair for pair, _family in EXPECTED_COUPLETS]
+ALLOWED_REFRAIN_FAMILIES = {"AT"}
+POSSESSIVE_PRONOUN_ENDINGS = {"min", "mitt", "mina", "din", "ditt", "dina", "sin", "sitt", "sina"}
 
 
 parser = RhymeEditionParser()
@@ -66,4 +73,11 @@ assert len(parser.lines) == len(EXPECTED_PAIRS) * 2, parser.lines
 actual_pairs = list(zip(parser.lines[::2], parser.lines[1::2]))
 actual_endings = [(ending(first), ending(second)) for first, second in actual_pairs]
 assert actual_endings == EXPECTED_PAIRS, actual_endings
-print(f"Verified {len(actual_pairs)} adjacent exact-rhyme couplets.")
+assert not set(ending(line) for line in parser.lines) & POSSESSIVE_PRONOUN_ENDINGS
+
+families = [family for _pair, family in EXPECTED_COUPLETS]
+duplicates = {family for family in families if families.count(family) > 1}
+assert duplicates == ALLOWED_REFRAIN_FAMILIES, duplicates
+assert [pair for pair, family in EXPECTED_COUPLETS if family == "AT"] == [("skatt", "natt"), ("natt", "skatt")]
+
+print(f"Verified {len(actual_pairs)} adjacent exact-rhyme couplets and one intentional refrain.")
